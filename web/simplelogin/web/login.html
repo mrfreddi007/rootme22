@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Simple Login</title>
+</head>
+<body>
+    <style>
+        * {
+            background-color: #edecec;
+        }
+
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: black;
+            opacity: 1; /* Firefox */
+        }
+
+        ::-ms-input-placeholder { /* Microsoft Edge */
+            color: black;
+        }
+    </style>
+
+    <div style="text-align: center; border: solid black 1px; width: 500px; margin: auto; padding: 50px; padding-bottom: 75px; margin-top: 100px; margin-bottom: 15px;">
+        <h1>Simple login</h1>
+
+        <form id="form"">
+            <input id="user" type="text" style="margin-bottom: 15px; border: black solid 1px;" placeholder="User"><br>
+            <input id="password" type="password" style="margin-bottom: 15px; border: black solid 1px;" placeholder="Password"><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id="res" style="text-align: center;"></div>
+
+    <script>
+        document.getElementById("form").onsubmit = (e) => {
+            e.preventDefault();
+
+            var user = document.getElementById("user").value
+            var password = document.getElementById("password").value
+
+            fetch("/auth", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({"user": user, "password": password})
+            })
+            .then(d => d.text())
+            .then((d) => {
+                var res = document.getElementById("res");
+                res.innerText = d;
+            })
+        }
+    </script>
+</body>
+</html>
